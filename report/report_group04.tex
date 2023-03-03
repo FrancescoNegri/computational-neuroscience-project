@@ -74,12 +74,73 @@ Note that in the following all the differential equations are solved by means of
 method and the selected time step is \(\Delta{t}=0.1\;ms\).
 
 \section*{Question (a)}
+First row of Figure 1 shows the different trend 
+of the membrane potential for the two models in
+the without noise condition.
+The applied current in both models is a step current with a 
+constant value I0 summed with a step current I1 that starts at
+time ton = 0.15 and ends at toff = 0.85. The total stimulation
+time is 1 s. 
+We choose values of current 
+For the LIF we choose a starting current of 0 A and we applied
+different stimulation currents of 190-250pA with a step of 2.5 pA. We choose a 
+For IFB, as reported in the literature we choose a starting I0 
+current of 230 pA and then we applied a step current I1 of.
+Io+I1*(ton,toff)
+
+We can see that in both cases for smaller current we have the
+understhreshold condition: the voltage depolarizes but it 
+doesn't reach the Vth so there aren't spikes.
+In the suprathreshold case, the current is bigger and the neuron 
+manages to reach the Vth so it fires. 
+The firing frequency increases with the 
+amplitude of the step current in both cases.
+
 
 
 \section*{Question (b)}
+Determine for the 2 models the corrispondent voltage 
+threshold Vth: Analysing the gain function we calculate 
+the bigger step current for having an underthreshold behaviour.
+It is the threshold current between suprathreshold and 
+underthreshold. Then we simulate our model using this threshold 
+current as input and we find out that the maximum value of 
+the membrane potential is almost -50 mV in both cases. 
+This agree with our parameters, infact we set Vth to the 
+same value.
 
 \section*{Question (c)}
+Figure 2 shows the gain functions of the two models. 
+Also in all plot there is a zoom on the transition part that 
+allows us to see the firing rate for values of step current 
+near the threshold current.
+
+The LIF neuron can be identified in the second class, in fact 
+it's showed that it can't fire for at frequency less then 10 Hz.
+The IFB neuron, instead is in class one, in fact it can fire at
+almost all frequencies and the fire frequency is proportional 
+to the amplitude of the current applied.
+Also there is a difference in the behavior of the two neurons:
+both models have a spiking behaviour, also the IFB model allows
+to simulate the bursting activity, as we can see in the 3 Figure.
+The difference in the model parameters between the two models is 
+the starting membrane potential Vm(0) that is -58mV for tonic 
+spiking and -77mV for the bursting activity.
+Also we have to change the applied step current. In fact, 
+in order to have bursts we need a bigger step current with 
+respect to the tonic case.
 
 \section*{Question (d)}
+The added noise is a gaussian noise with mean 0 and standard 
+deviation of 1/100 of the maximum value of the current.
+Adding noise both models manage to spike at a lower 
+firing frequency. -> Figure 2
+IFB from 2 Hz to 1 Hz. Still class 1.
+LIF from 15 Hz to 5 Hz. The model can fire at a lower frequency,
+so it can have a behaviour more similar to a class 1 one.
+An other difference with the without noise case is that here 
+spikes are not fired at a constant frequency. This is due to the 
+fluctuations in the amplitude of the current given by noise. 
+-> Figure 1
 
 \end{document}
