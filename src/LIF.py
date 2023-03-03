@@ -14,9 +14,6 @@ class LIF(BaseNeuron):
 
             for i in np.arange(1, np.size(self._t)):
                 if self._t[i] - self._t_last_spike > self.T_ref:
-                    # V_ss = (self.I_stim[trial_idx][i] + self.g_leak * self.E_leak) / self.g_leak
-
-                    # self._V_m[trial_idx][i] = V_ss + (self._V_m[trial_idx][i-1] - V_ss) * np.exp(-dt/self.tau_m)
                     self._V_m[trial_idx][i] = self._V_m[trial_idx][i-1] + dt * (self.I_stim[trial_idx][i] + self.g_leak * (self.E_leak - self._V_m[trial_idx][i-1])) / self.C_m
 
                     self.V_m[trial_idx][i] = self._V_m[trial_idx][i]

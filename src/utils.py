@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Generate step current stimulus and time vector from the amplitude(s)
 def generate_stimulus(I_amplitudes, simulation_time, t_on=None, t_off=None, dt=1e-4, is_noisy = False):
     if t_on is None:
         t_on = 0
@@ -37,6 +38,7 @@ def generate_stimulus(I_amplitudes, simulation_time, t_on=None, t_off=None, dt=1
 
     return I_stim, t
 
+# Plot the gain function
 def plot_gain_function(I_amplitudes, firing_rate, title='Gain Function', subtitle=None, xticks=None):
     plt.figure()
     plt.plot(I_amplitudes * 1e12, firing_rate, marker='x', linestyle=':')
@@ -53,6 +55,7 @@ def plot_gain_function(I_amplitudes, firing_rate, title='Gain Function', subtitl
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
+# Plot V_m and I_stim vs. time for several applied current values
 def plot_trials(t, V_m, I_stim, title='Results', subtitle=None, fig_width=2, fig_height=4):
     fig = plt.figure(figsize=(fig_width * np.shape(V_m)[0], fig_height), dpi=150)
     axs = fig.subplots(2, np.size(I_stim, axis=0), sharex='col', sharey='row')
