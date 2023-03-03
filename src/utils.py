@@ -23,15 +23,17 @@ def generate_stimulus(I_amplitudes, simulation_time, t_on=None, t_off=None, dt=1
             max_I = I_amplitude
 
         if is_noisy:
-            min_noise = np.random.normal(0, max_I/100, t) if min_I != 0 else 0
+            min_noise_1 = np.random.normal(0, max_I/100, round(t_on / dt)) if min_I != 0 else 0
+            min_noise_2 = np.random.normal(0, max_I/100, np.size(t) - round(t_off / dt)) if min_I != 0 else 0
             max_noise = np.random.normal(0, max_I/100, round(t_off / dt) - round(t_on / dt))
         else:
+            min_noise_1 = 0
+            min_noise_2 = 0
             max_noise = 0
-            min_noise = 0
         
-        I_stim[trial_idx][0:round(t_on / dt)] = min_I + min_noise
+        I_stim[trial_idx][0:round(t_on / dt)] = min_I + min_noise_1
         I_stim[trial_idx][round(t_on / dt):round(t_off / dt)] = max_I + max_noise
-        I_stim[trial_idx][round(t_off / dt):] = min_I + min_noise
+        I_stim[trial_idx][round(t_off / dt):] = min_I + min_noise_2
 
     return I_stim, t
 
@@ -51,8 +53,8 @@ def plot_gain_function(I_amplitudes, firing_rate, title='Gain Function', subtitl
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
-def plot_trials(t, V_m, I_stim, title='Results', subtitle=None):
-    fig = plt.figure(figsize=(2 * np.shape(V_m)[0], 4), dpi=150)
+def plot_trials(t, V_m, I_stim, title='Results', subtitle=None, fig_width=2, fig_height=4):
+    fig = plt.figure(figsize=(fig_width * np.shape(V_m)[0], fig_height), dpi=150)
     axs = fig.subplots(2, np.size(I_stim, axis=0), sharex='col', sharey='row')
 
     if np.size(I_stim, axis=0) == 1:
